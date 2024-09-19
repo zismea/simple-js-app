@@ -1,15 +1,25 @@
-let pokemonList = [
-    {name: 'Ninetales', height: 1, types: 'fire'},
-    {name: 'Alakazam', height: 4, types: 'psychic'},
-    {name: 'Jynx', height: 8, types: ['ice', 'psychic']},
-];
-
-for (let i = 0; i < pokemonList.length; i++) {
-    if (pokemonList[i].height < 2) {
-        document.write(pokemonList[i].name + ": Wow, she is tiny!");
-    } else if (pokemonList[i].height > 2 && pokemonList[i].height < 6) {
-        document.write(pokemonList[i].name + ": He is not too dangerous!")
-    } else {
-        document.write(pokemonList[i].name + ": Please be careful!")
+let pokemonRepository = (function() {
+    let pokemonList = [
+        {name: 'Ninetales', height: 1, types: 'fire'},
+        {name: 'Alakazam', height: 4, types: 'psychic'},
+        {name: 'Jynx', height: 8, types: ['ice', 'psychic']},
+    ];
+    function add(pokemon) {
+        pokemonList.push(pokemon);
+    }    
+    function getAll() {
+        return pokemonList;
     }
-}
+    return {
+        add: add,
+        getAll: getAll
+    }
+})();
+
+let pokemons = pokemonRepository.getAll();
+
+pokemons.forEach(pokemon => {
+    document.write(pokemon.name + "| height: " + pokemon.height);
+    if (pokemon.height <= 2) {
+        document.write(": Wow, she is tiny!")};
+});
